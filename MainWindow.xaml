@@ -18,6 +18,7 @@
                 <ContextMenu>
                     <MenuItem Header="Add Node" Command="{Binding DataContext.AddNodeCommand,Source={StaticResource MainProxy}}"/>
                     <MenuItem Header="Add Rectangle Node" Command="{Binding DataContext.AddRectangleNodeCommand,Source={StaticResource MainProxy}}"/>
+                    <MenuItem Header="Add Circle Node" Command="{Binding DataContext.AddCircleNodeCommand,Source={StaticResource MainProxy}}"/>
                     <MenuItem Header="Delete Node" Command="{Binding DataContext.DeleteNodeCommand,Source={StaticResource MainProxy}}"/>
                 </ContextMenu>
             </xen:XenNodifyWorkspace.ContextMenu>

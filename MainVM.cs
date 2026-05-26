@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using XenNodify.MVVM.ViewModel;
-using XenNodify.MVVM.ViewModel.NodesType.RectangleConfiguration;
+using XenNodify.MVVM.ViewModel.NodesType;
 
 namespace PlaygroundNodifyWpf
 {
@@ -19,6 +20,7 @@ namespace PlaygroundNodifyWpf
         ObservableCollection<MyNodeViewModel> _clusterUiNode = new();
         public event Action<MyNodeViewModel>? RequestAddClusterNode;
         public event Action<RectangleNodeViewModel>? RequestAddRectangleNode;
+        public event Action<CircleNodeViewModel>? RequestAddCircleNode;
         public bool IsUpdating { get; set; }
 
         [ObservableProperty]
@@ -26,12 +28,14 @@ namespace PlaygroundNodifyWpf
 
         public IAsyncRelayCommand AddNodeCommand { get; }
         public IAsyncRelayCommand AddRectangleNodeCommand { get; }
+        public IAsyncRelayCommand AddCircleNodeCommand { get; }
         public IAsyncRelayCommand DeleteNodeCommand { get; }
 
         public MainVM()
         {
             AddNodeCommand = new CommunityToolkit.Mvvm.Input.AsyncRelayCommand(CreateNewNode, CanCreateNode);
             AddRectangleNodeCommand = new CommunityToolkit.Mvvm.Input.AsyncRelayCommand(CreateNewRectangleNode, CanCreateNode);
+            AddCircleNodeCommand = new CommunityToolkit.Mvvm.Input.AsyncRelayCommand(CreateNewCircleNode, CanCreateNode);
             DeleteNodeCommand = new CommunityToolkit.Mvvm.Input.AsyncRelayCommand(DeleteNodes, CanDeleteNodes);
 
             Editor.SelectedNodes.CollectionChanged += (_, __) =>
@@ -74,6 +78,8 @@ namespace PlaygroundNodifyWpf
             {
                 Title = "new node",
                 Location = new Point(MousePosition.X, MousePosition.Y),
+                Length = 100,
+                Height = 1000,
                 //ClusterId = 1,
             };
             //node.Input.Add(new ConnectorViewModel
@@ -87,6 +93,23 @@ namespace PlaygroundNodifyWpf
 
             //ClusterUiNode.Add(node);
             RequestAddRectangleNode?.Invoke(node);
+        }
+        public async Task CreateNewCircleNode()
+        {
+            var node = new CircleNodeViewModel
+            {
+                Title = "new Circle",
+                Location = new Point(MousePosition.X, MousePosition.Y),
+                Color = Colors.PaleGoldenrod,
+                Radius = 120,
+                
+
+
+
+                //ClusterId = 1,
+            };
+            
+            RequestAddCircleNode?.Invoke(node);
         }
         public async Task DeleteNodes()
         {

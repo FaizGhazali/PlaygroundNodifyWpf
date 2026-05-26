@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using XenNodify.MVVM.ViewModel;
-using XenNodify.MVVM.ViewModel.NodesType.RectangleConfiguration;
+using XenNodify.MVVM.ViewModel.NodesType;
 
 namespace PlaygroundNodifyWpf
 {
@@ -26,6 +26,7 @@ namespace PlaygroundNodifyWpf
 
             vm.RequestAddClusterNode += OnAddClusterNode;
             vm.RequestAddRectangleNode +=OnAddRectangleNode;
+            vm.RequestAddCircleNode +=OnAddCircleNode;
 
 
             Unloaded += OnUnloaded;
@@ -78,6 +79,13 @@ namespace PlaygroundNodifyWpf
             }
         }
         private void OnAddRectangleNode(RectangleNodeViewModel node)
+        {
+            if (this.DataContext is MainVM vm)
+            {
+                vm.Editor.Nodes.Add(node);
+            }
+        }
+        private void OnAddCircleNode(CircleNodeViewModel node)
         {
             if (this.DataContext is MainVM vm)
             {

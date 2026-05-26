@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <Reference Include="XenNodify">
-      <HintPath>..\..\..\2026\Service\XenNodify\bin\Debug\net8.0-windows\XenNodify.dll</HintPath>
+      <HintPath>..\PlaygroundNodifyService\bin\Debug\net8.0-windows\XenNodify.dll</HintPath>
     </Reference>
   </ItemGroup>
 
